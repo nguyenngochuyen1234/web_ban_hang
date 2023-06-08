@@ -17,5 +17,11 @@ export default [
         price: 99.95,
         collections:"PERSONALIZED"
     },
+    {
+        img: "https://img.thesitebase.net/10266/10266415/products/ver_1/0x720@1682416801cdd7f0405d.jpeg",
+        description: "Nrt Uzumaki Sneakers Personalized Anime Shoes MN2903",
+        price: 99.95,
+        collections:"PERSONALIZED"
+    },
 ]
 
