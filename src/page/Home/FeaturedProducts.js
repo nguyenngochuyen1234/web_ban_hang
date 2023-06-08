@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Carousel from './Carousel'
 import productsApi from "../../api"
 import { Link, useNavigate } from "react-router-dom";
+//toi la viet
 const FeaturedProducts = () => {
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const FeaturedProducts = () => {
       <section>
         <h1 className='text-[50px]'>PERSONALIZED NAME</h1>
       </section>
-      <div className='flex flex-col items-center justify-center'>
+      <div className='class flex flex-col items-center justify-center'>
         <h1 className='text-[24px] font-[600px]'>PERSONALIZED NAME</h1>
         <div className=' flex flex-row mb-[40px px-[12px] pt-[16px]'>
           {showListProducts}
