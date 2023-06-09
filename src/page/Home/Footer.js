@@ -1,4 +1,9 @@
 import React from 'react'
+import { FacebookOutlined } from '@ant-design/icons'
+import { TwitterOutlined } from '@ant-design/icons/lib/icons'
+import { YoutubeOutlined } from '@ant-design/icons/lib/icons'
+import { InstagramOutlined } from '@ant-design/icons/lib/icons'
+import './app.css'
 const Footer=()=>{
     return(
         <div className='bg-[#000] min-h-[400px] py-[80px] px-[10%] '>
@@ -41,15 +46,29 @@ const Footer=()=>{
                 </ul>
 
             </div>
-            <div>
+            <div className='mt-[10px] flex justify-between'>
                 <div>
-                    {/* <h1 className='bg-[#fff]'>toi la viet</h1> */}
                     <ul>
-                    <i class="fa-brands fa-facebook"></i>
+                    <FacebookOutlined 
+                         className='text-white text-xl mx-[7px]'
+                    />
+                    <TwitterOutlined
+                        className='text-white text-xl mx-[7px]' 
+                     />
+                     <YoutubeOutlined 
+                      className='text-white text-xl mx-[7px]' 
+                     />
+                     <InstagramOutlined
+                      className='text-white text-xl mx-[7px]' 
+                      />
                     </ul>
                 </div>
-                <div></div>
-
+                <div>
+                    <h4 className='text-white hover:underline'>DMCA Report</h4>
+                </div>
+            </div>
+            <div>
+                <p className='text-white flex justify-end text-xs mt-[5px]'>© 2023 GEAR ANIME. THE ART OF CUSTOM ANIME SHOES</p>
             </div>
         </div>
     )
