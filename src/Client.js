@@ -21,9 +21,9 @@ function Client() {
           <Route path="products" element={<Products />} />
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
           {/* <Route path="register" element={<Login />} /> */}
         </Route>
+        <Route path="checkout" element={<Checkout />} />
         {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </BrowserRouter>
