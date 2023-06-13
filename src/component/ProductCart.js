@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../style/ProductCart.css'
 import { InputNumber } from 'antd';
-const ProductCart = ({ product }) => {
+const ProductCart = ({ product, sizeImg }) => {
     const [quantity, setQuantity] = useState(0)
     const increaseQuantity = () =>{
         setQuantity(prev=>prev+1)
@@ -9,9 +9,13 @@ const ProductCart = ({ product }) => {
     const decreaseQuantity = () =>{
         setQuantity(prev=>prev-1<0?0:prev-1)
     }
+    const styleImg = {
+        height: sizeImg,
+        width: sizeImg,
+    }
     return (
         <div className='flex flex-row mb-[24px]'>
-            <img className='h-[195px] w-[195px]' src={product.img} />
+            <img style={{height:sizeImg, width:sizeImg}} src={product.img} />
             <div className='flex flex-col ml-6'>
                 <a className='a-hover mb-[7px] border-[#fff] border-solid border-[1px]'>{product.description}</a>
                 <p className='product-cart_options'>Men/US4</p>

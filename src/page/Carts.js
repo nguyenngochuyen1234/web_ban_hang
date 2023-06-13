@@ -21,7 +21,7 @@ const Carts = () => {
                 <div className='line-col'></div>
                 {
                   productsArr.map(product => (
-                    <ProductCart product={product} />
+                    <ProductCart product={product} sizeImg='195px'/>
                   ))
                 }
               </div>
