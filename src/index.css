@@ -93,7 +93,7 @@ ul.text_footer > li{
 ul.text_footer > li:hover{
     text-decoration-line: underline;
 }
-:where(.css-dev-only-do-not-override-px30ob).ant-input:hover {
+/* :where(.css-dev-only-do-not-override-px30ob).ant-input:hover {
     border-color: #1d9dff;
     border-inline-end-width: 1px;
 }
@@ -107,5 +107,5 @@ ul.text_footer > li:hover{
     box-shadow: 0 0 0 1px #0082e5;
     border-inline-end-width: 1px;
     outline: 0;
-}
+} */
 

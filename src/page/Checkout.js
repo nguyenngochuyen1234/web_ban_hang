@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import img from '../assets/img/0x1512@164335548704b22996ff.webp'
-import { Col, Row } from 'antd';
+import { Col, Row, ConfigProvider } from 'antd';
 import { Button, Form, Input, InputNumber, Checkbox } from 'antd';
 import imgPayment from '../assets/img/Screenshot 2023-06-1102727.png'
 import { RightOutlined } from '@ant-design/icons/lib/icons';
@@ -82,28 +82,6 @@ const Checkout = () => {
             >
               <Input placeholder="Address" />
             </Form.Item>
-            <div className='flex flex-row justify-between w-[400px]'>
-              <Form.Item
-                name='Country'
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Country" />
-              </Form.Item>
-              <Form.Item
-                name='zipCode'
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Zip Code(optional)" />
-              </Form.Item>
-            </div>
             <Form.Item
               name='phoneNumber'
               rules={[
