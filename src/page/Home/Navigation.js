@@ -10,7 +10,7 @@ const Navigation = () => {
   const navigate = useNavigate();
   return (
     <div className='h-[100vh]'>
-      <div className='flex flex-row h-[88px] py-[20px] justify-around items-center fixed w-[100vw] z-10 bg-white cursor-pointer'>
+      <div className='flex flex-row h-[88px] py-[20px] justify-around items-center fixed w-[100vw] z-10 bg-white cursor-pointer top-0 left-0 border'>
         <img className='h-[50px]' onClick={()=>{navigate('/')}}  src='https://img.thesitebase.net/files/10266415/2021/11/05/180x180@16361030598d3d90458e.png' />
         <div>
           <a className='mx-[20px] cursor-pointer relative categories'>CATEGORIES

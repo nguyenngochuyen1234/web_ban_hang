@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
     <div className='h-[340px] flex flex-col items-center justify-between w-[268px] px-[12px] cursor-pointer mr-[20px]' onClick={() => navigate('/products')}>
       <img className='h-[268px]' src={item.img} />
       <h1 className='text-center text-[13px]'>{item.description}</h1>
-      <h1 className='text-emerald-800'>${item.price} USD</h1>
+      <h1 className='text-emerald-800 font-semibold tracking-widest'>${item.price} USD</h1>
     </div>
   )
 
