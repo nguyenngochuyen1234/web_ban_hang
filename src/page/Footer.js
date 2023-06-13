@@ -3,7 +3,7 @@ import { FacebookOutlined } from '@ant-design/icons'
 import { TwitterOutlined } from '@ant-design/icons/lib/icons'
 import { YoutubeOutlined } from '@ant-design/icons/lib/icons'
 import { InstagramOutlined } from '@ant-design/icons/lib/icons'
-import './app.css'
+// import './app.css'
 const Footer=()=>{
     return(
         <div className='bg-[#001219] min-h-[400px] py-[80px] px-[10%] '>

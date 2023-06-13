@@ -4,7 +4,7 @@ import { UserOutlined, ShoppingCartOutlined, DownOutlined } from '@ant-design/ic
 import { AudioOutlined } from '@ant-design/icons';
 import CartDrawerContainer from '../../component/CartDrawerContainer';
 import { Input, Space } from 'antd';
-
+import Footer from '../Footer';
 import './app.css'
 const { Search } = Input;
 const Navigation = () => {
@@ -12,8 +12,7 @@ const Navigation = () => {
   const navigate = useNavigate();
   return (
     <div className='h-[100vh]'>
-      <div className='flex flex-row h-[88px] py-[20px] justify-around items-center relative'>
-        <div className='line-row'></div>
+      <div className='flex flex-row h-[88px] py-[20px] justify-around items-center fixed w-[100vw] z-10 bg-white cursor-pointer top-0 left-0 border'>
         <img className='h-[50px]' onClick={() => { navigate('/') }} src='https://img.thesitebase.net/files/10266415/2021/11/05/180x180@16361030598d3d90458e.png' />
         <div>
           <a className='mx-[20px] cursor-pointer relative categories'>CATEGORIES
@@ -33,13 +32,14 @@ const Navigation = () => {
         <div className='flex'>
           {/* <Search placeholder="" className='w-[150px]' enterButton /> */}
           <Link to="/login"><UserOutlined className='text-xl font-bold mx-[5px]' /></Link>
-          <Link to="/"><ShoppingCartOutlined className='text-xl font-bold mx-[5px] relative' onMouseOver={()=>{setCartDrawerContainerOpen(true)}}/>
-            {CartDrawerContainerOpen&&<CartDrawerContainer setCartDrawerContainerOpen={setCartDrawerContainerOpen}/>}
+          <Link to="/"><ShoppingCartOutlined className='text-xl font-bold mx-[5px] relative' onMouseOver={() => { setCartDrawerContainerOpen(true) }} />
+            {CartDrawerContainerOpen && <CartDrawerContainer setCartDrawerContainerOpen={setCartDrawerContainerOpen} />}
           </Link>
         </div>
 
       </div>
       <Outlet />
+      <Footer />
     </div>
   )
 }
