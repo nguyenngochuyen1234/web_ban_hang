@@ -5,7 +5,7 @@ import { Button, Form, Input, InputNumber, Checkbox } from 'antd';
 import imgPayment from '../assets/img/Screenshot 2023-06-1102727.png'
 import { RightOutlined } from '@ant-design/icons/lib/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import productsApi from "../api"
 const layout = {
 

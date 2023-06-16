@@ -29,7 +29,7 @@ const Carts = () => {
             <Col span={8}>
               <div className='px-3 w-[366px]'>
                 <div className='flex flex-row justify-between mb-[5px]'>
-                  <h5 className=''>SUBTOTAL</h5>
+                  <h5>SUBTOTAL</h5>
                   <h5>$899.55 USD</h5>
                 </div>
                 <p className='product-cart_options'>Please confirm the product size - Shipping fee is calculated at checkout</p>
@@ -38,12 +38,8 @@ const Carts = () => {
               </div>
             </Col>
           </Row>
-
         </div>
-
-
       </div>
-
     </div>
   )
 }

@@ -55,7 +55,9 @@ a {
 input[type="number"]:focus-visible {
     outline: none;
 }
-
+.cursor{
+    cursor: pointer;
+}
 input[type=number] {
     width: 54px;
     text-align: center;

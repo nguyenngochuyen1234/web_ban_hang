@@ -1,35 +1,28 @@
-import React, { useState } from 'react'
-import Carousel from './Carousel'
+import React, { useEffect, useReducer, useState } from 'react'
 import productsApi from "../../api"
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Space } from 'antd';
-//toi la viet
-const FeaturedProducts = () => {
-  const navigate = useNavigate();
+import ProductCartHome from '../../component/ProductCartHome';
 
+//toi la viet
+const FeaturedProducts = ({ nameCollection, pathName }) => {
+  const navigate = useNavigate();
   const [productsArr, setProducsArr] = useState(productsApi)
+  useEffect(() => {
+    const productsCollection = productsApi.filter(item => item.collections === nameCollection)
+    setProducsArr(productsCollection.filter((item, index) => index < 4))
+  }, [])
 
   const showListProducts = productsArr.map(item =>
-    <div className='h-[340px] flex flex-col items-center justify-between w-[268px] px-[12px] cursor-pointer mr-[20px]' onClick={() => navigate('/products')}>
-      <img className='h-[268px]' src={item.img} />
-      <h1 className='text-center text-[13px]'>{item.description}</h1>
-      <h1 className='text-emerald-800 font-semibold tracking-widest'>${item.price} USD</h1>
-    </div>
+    <ProductCartHome item={item} />
   )
 
   return (
-    <div className='flex flex-col items-center '>
-      <div className='w-[100%]'>
-        <Carousel />
-      </div > 
-   
-      <div className='class flex flex-col items-center justify-center'>
-        <h1 className='text-[24px] font-[600px] my-[50px]'>PERSONALIZED NAME</h1>
-        <div className=' flex flex-row mb-[40px px-[12px] pt-[16px]'>
-          {showListProducts}
-        </div>
+    <div className='class flex flex-col items-center justify-center py-[18px]'>
+      <h1 className='text-[24px] font-[600px] mb-10'>{nameCollection}</h1>
+      <div className=' flex flex-row mb-[40px px-[12px] pt-[16px]'>
+        {showListProducts}
       </div>
-      <Button className='my-[20px]' size='large'>View more</Button>
+      <button className="mt-20 border-[1px] border-[#000] py-[10px] px-[22px] rounded-sm" onClick={()=>{navigate(`collection/${pathName}`)}}>View more</button>
     </div>
   )
 }

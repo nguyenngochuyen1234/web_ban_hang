@@ -6,7 +6,7 @@ const contentStyle = {
   lineHeight: '560px',
   textAlign: 'center',
   background: '#364d79',
-  width:"100%",
+  width: "100%",
 };
 const App = () => {
   const onChange = (currentSlide) => {
@@ -23,7 +23,6 @@ const App = () => {
       <div>
         <img style={contentStyle} src="https://img.thesitebase.net/files/10266415/2023/03/23/922x2048_center@167955963808cccf3ce6.jpeg" />
       </div>
-      <h1>Hoang Viet Quang</h1>
 
     </Carousel>
   );

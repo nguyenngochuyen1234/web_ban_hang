@@ -36,7 +36,6 @@ const Navigation = () => {
             {CartDrawerContainerOpen && <CartDrawerContainer setCartDrawerContainerOpen={setCartDrawerContainerOpen} />}
           </Link>
         </div>
-
       </div>
       <Outlet />
       <Footer />
