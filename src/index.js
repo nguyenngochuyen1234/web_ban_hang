@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ConfigProvider } from 'antd';
 import './index.css';
-import Client from './Client';
+import App from './App';
 import config from './config.ts'
 import { AppProvider } from './AppContext'
 
@@ -11,7 +11,7 @@ root.render(
   <React.StrictMode>
     {/* <ConfigProvider theme={config}> */}
     <AppProvider>
-      <Client />
+      <App />
 
     </AppProvider>
     {/* </ConfigProvider> */}

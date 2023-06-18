@@ -7,9 +7,9 @@ import Products from './page/Products'
 import Cart from './page/Carts'
 import Checkout from './page/Checkout'
 import ListProducts from './page/ListProducts'
-
+import Admin from './Admin';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-function Client() {
+function App() {
 
   return (
     <BrowserRouter>
@@ -25,10 +25,11 @@ function Client() {
           <Route path="collection/:pathName" element={<ListProducts />} />
         </Route>
           <Route path="checkout" element={<Checkout />} />
+          <Route path="admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
 
   )
 }
 
-export default Client;
+export default App;
