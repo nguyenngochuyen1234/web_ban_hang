@@ -8,6 +8,7 @@ import Products from './page/Products'
 import Cart from './page/Carts'
 import Checkout from './page/Checkout'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Collections from './page/Collection';
 function Client() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function Client() {
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="collection" element={<Collections />} />
           {/* <Route path="register" element={<Login />} /> */}
         </Route>
         {/* <Route path="/login" element={<Login />} /> */}

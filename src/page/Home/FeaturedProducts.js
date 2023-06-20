@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
           {showListProducts}
         </div>
       </div>
-      <Button className='my-[20px]' size='large'>View more</Button>
+      <Button className='my-[20px]' size='large' onClick={()=>navigate('/collection')}>View more</Button>
     </div>
   )
 }

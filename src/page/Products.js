@@ -5,8 +5,8 @@ import { Button } from 'antd';
 import { Input } from 'antd';
 import { FireFilled } from '@ant-design/icons';
 import { useState } from 'react';
-
-
+import { FacebookFilled,TwitterCircleFilled,MailOutlined,InstagramOutlined} from '@ant-design/icons';
+import { Carousel } from 'antd';
 const Products = () => {
 
   const [count, setCount] = useState(1);
@@ -68,11 +68,19 @@ const Products = () => {
 
           </div>
           <p className='text-sm my-[5px] font-semibold my-[10px]'>Estimated delivery between:</p>
-          <p className='text-md my-[5px] font-semibold my-[10px]'>July 02 - 12 <span className='text-xs tracking-wider font-normal opacity-60'>(delivery to Vietnam)</span></p>
+          <p className='text-md my-[5px] font-semibold my-[10px] border-b py-[10px]'>July 02 - 12 <span className='text-xs tracking-wider font-normal opacity-60'>(delivery to Vietnam)</span></p>
+          <div className='border-b py-[10px]'>  <img src='https://img.thesitebase.net/files/10266415/2023/05/30/0x720@16854297612dc402aa1b.png' className=''></img></div>
+          <div className='py-[5px] w-[100%] border-b'><p className='ml-[5px]'> Type : <a className=' hover:border-b border-black cursor-pointer'>J1 Sneakers</a></p></div>
+          <div className='py-[5px] ml-[5px]'>Share :             
+          <FacebookFilled className='text-blue-700 text-lg mr-[10px] ml-[20px] cursor-pointer' /> 
+          <TwitterCircleFilled className='text-blue-300 text-lg  mr-[10px] cursor-pointer' /> 
+          <MailOutlined  className='text-gray-700 text-lg  mr-[10px] cursor-pointer'/>
+          <InstagramOutlined className='text-pink-700 text-lg  mr-[10px] cursor-pointer'/>
+          </div>
         </div>
 
       </div>
-      <div className='w-[100%] min-h-[400px] bg-stone-200 px-[15%] py-[30px]'>
+      <div className='w-[100%] min-h-[400px] bg-stone-200 px-[15%] py-[30px] mt-[20px]'>
         <ul className='flex mb-[20px]'>
           <li className={`mr-[20px] tracking-widest cursor-pointer ${index === 0 ? 'border-b border-black' : 'text-gray-500'}`} onClick={() => { setIndex(0) }} >DESCRIPTION</li>
           <li className={`mr-[20px] tracking-widest cursor-pointer ${index === 1 ? 'border-b border-black' : 'text-gray-500'}`} onClick={() => { setIndex(1) }} >SHIPPING INFO</li>
