@@ -9,6 +9,7 @@ import Checkout from './page/Checkout'
 import ListProducts from './page/ListProducts'
 import Admin from './Admin';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Search from './page/Search';
 function App() {
 
   return (
@@ -23,9 +24,12 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="collection/:pathName" element={<ListProducts />} />
+          <Route path="search" element={<Search />} />
         </Route>
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="admin" element={<Admin />} />
+
+    
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
 

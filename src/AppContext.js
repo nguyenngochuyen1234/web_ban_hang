@@ -17,6 +17,7 @@ export const AppProvider = ({ children }) => {
         },
       ]
       const [productsArr, setProducsArr] = useState(productsApi)
+      
     const value = {
         arrCollections,
         productsArr, 
