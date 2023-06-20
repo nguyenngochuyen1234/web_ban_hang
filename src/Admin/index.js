@@ -1,9 +1,10 @@
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
+  TeamOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  ShoppingOutlined,
+  FileDoneOutlined
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
@@ -38,18 +39,18 @@ const Admin = () => {
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              icon: <ShoppingOutlined />,
+              label: 'Products',
             },
             {
               key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <TeamOutlined />,
+              label: 'Customers',
             },
             {
               key: '4',
-              icon: <UploadOutlined />,
-              label: 'nav 4',
+              icon: <FileDoneOutlined />,
+              label: 'Orders',
             },
           ]}
           onClick={({ key }) => handleMenuClick(key)}
