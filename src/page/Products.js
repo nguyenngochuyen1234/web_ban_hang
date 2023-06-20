@@ -1,12 +1,12 @@
 import React from 'react'
-import { Outlet, Link, useNavigate } from "react-router-dom";
-import Footer from './Footer'
 import { Button } from 'antd';
 import { Input } from 'antd';
 import { FireFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import { FacebookFilled,TwitterCircleFilled,MailOutlined,InstagramOutlined} from '@ant-design/icons';
 import { Carousel } from 'antd';
+import { useNavigate } from "react-router-dom";
+
 const Products = () => {
 
   const [count, setCount] = useState(1);
@@ -64,7 +64,7 @@ const Products = () => {
                 <div className='h-[100%]  w-[100%] leading-[2.5] cursor-pointer ' onClick={decrement}>-</div>
               </div>
             </div>
-            <button className='bg-black grow ml-[15px] rounded-sm shadow text-white font-semibold text-xl'>Add to cart</button>
+            <button className='bg-black grow ml-[15px] rounded-sm shadow text-white font-semibold text-xl' onClick={()=>{navigate('/cart')}}>Add to cart</button>
 
           </div>
           <p className='text-sm my-[5px] font-semibold my-[10px]'>Estimated delivery between:</p>
@@ -119,7 +119,6 @@ const Products = () => {
           <p className='text-[14px] mb-[4px]'>View detail here: refund and return policy</p>
         </div>}
       </div>
-      <Footer />
     </div>
 
 
