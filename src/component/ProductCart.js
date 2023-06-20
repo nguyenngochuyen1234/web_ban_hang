@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { AppContext } from '../AppContext';
 import '../style/ProductCart.css'
 import { InputNumber } from 'antd';
 const ProductCart = ({ product, sizeImg }) => {
-    const [quantity, setQuantity] = useState(0)
+    const { handleAddProduct, UserProducts } = useContext(AppContext)
+    const [quantity, setQuantity] = useState(product.quantity || 1)
+    useEffect(()=>{
+        
+        handleAddProduct({
+            ...product,
+            quantity:quantity
+        })
+    },[quantity])
     const increaseQuantity = () =>{
         setQuantity(prev=>prev+1)
     }

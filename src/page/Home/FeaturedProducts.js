@@ -12,8 +12,8 @@ const FeaturedProducts = ({ nameCollection, pathName }) => {
     setProducsArr(productsCollection.filter((item, index) => index < 4))
   }, [])
 
-  const showListProducts = productsArr.map(item =>
-    <ProductCartHome item={item} />
+  const showListProducts = productsArr.map((item, id) =>
+    <ProductCartHome item={item} key={id}/>
   )
 
   return (

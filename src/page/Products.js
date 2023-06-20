@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { AppContext } from '../AppContext';
 import { Button } from 'antd';
 import { Input } from 'antd';
 import { FireFilled } from '@ant-design/icons';
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import productsApi from "../api"
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Products = () => {
+  const { id } = useParams();
 
+  const { UserProducts, handleAddProduct } = useContext(AppContext)
+  const productData = productsApi.find(product=>product.id==id)
+  const lastQuantity = UserProducts.find(product=>product.id==id) || 0
   const [count, setCount] = useState(1);
   const [index, setIndex] = useState(0);
 
@@ -21,15 +27,18 @@ const Products = () => {
 
 
   const navigate = useNavigate();
-
+  const handleAddToCart = () => {
+    handleAddProduct({...productData, quantity:count + lastQuantity})
+    navigate('/cart')
+  }
 
   return (
     <div>
       <div className=' bg-[#fff] flex flex-row px-[15%] mt-[100px]'>
-        <img className='h-[500px]' src='https://img.thesitebase.net/10266/10266415/products/ver_1/0x720@1685693632575.jpg' />
+        <img className='h-[500px]' src={productData.img} />
         <div className='ml-[10%]'>
-          <h1 className='text-lg tracking-widest'>Luna Cat Sneakers Personalized Name MV1304</h1>
-          <h4 className='text-emerald-800 tracking-widest font-semibold'>$99.95 USD</h4>
+          <h1 className='text-lg tracking-widest'>{productData.description}</h1>
+          <h4 className='text-emerald-800 tracking-widest font-semibold'>${productData.price}USD</h4>
           <p className='font-semibold text-xs tracking-wide opacity-90 my-[5px]'> <FireFilled className="translate-y-[-4px] " /> 6 people have this in their cart</p>
           <p className='text-sm opacity-95  my-[5px]'><span className='font-medium'>Gender:</span> Men</p>
           <Button className='py-[5px] px-[10px] text-xs tracking-wider mr-[10px]'>Men</Button>
@@ -63,7 +72,7 @@ const Products = () => {
                 <div className='h-[100%]  w-[100%] leading-[2.5] cursor-pointer ' onClick={decrement}>-</div>
               </div>
             </div>
-            <button className='bg-black grow ml-[15px] rounded-sm shadow text-white font-semibold text-xl' onClick={()=>{navigate('/cart')}}>Add to cart</button>
+            <button className='bg-black grow ml-[15px] rounded-sm shadow text-white font-semibold text-xl' onClick={handleAddToCart}>Add to cart</button>
 
           </div>
           <p className='text-sm my-[5px] font-semibold my-[10px]'>Estimated delivery between:</p>
