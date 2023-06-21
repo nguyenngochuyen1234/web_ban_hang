@@ -37,7 +37,7 @@ const Navigation = () => {
           <a className='mx-[20px] cursor-pointer'>BLOGS</a>
         </div>
         <div className='flex'>
-          <Search onSearch={onSearch} value={searchValue} onChange={(value)=>{setSearchValue(value.target.value)}}/>
+          <Search className='w-[120px]' onSearch={onSearch} value={searchValue} onChange={(value)=>{setSearchValue(value.target.value)}}/>
           <Link to="/login"><UserOutlined className='text-xl font-bold mx-[5px]' /></Link>
           <Link to="/"><ShoppingCartOutlined className='text-xl font-bold mx-[5px] relative' onMouseOver={() => { setCartDrawerContainerOpen(true) }} />
             {CartDrawerContainerOpen && <CartDrawerContainer setCartDrawerContainerOpen={setCartDrawerContainerOpen} />}

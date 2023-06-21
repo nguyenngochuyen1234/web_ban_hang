@@ -53,12 +53,12 @@ const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
 
       >
         {
-          columns.map(col =>
+          columns.map((col) =>
             <Form.Item
-            key={col.key}
+              key={col.key}
               label={col.title}
               name={col.key}
-              
+              type='file'
               rules={[
                 {
                   required: true,
@@ -66,7 +66,8 @@ const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
                 },
               ]}
             >
-              <Input />
+            {col.title === 'Img' ? <input type="file" /> : <Input />}
+          
             </Form.Item>)
         }
 

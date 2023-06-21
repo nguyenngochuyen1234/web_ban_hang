@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { AutoComplete, Button, Cascader, Checkbox, Col, Form, Input, message, Row, Select, } from 'antd';
 import { AppContext } from '../AppContext';
 import { useState } from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -25,11 +25,25 @@ const formItemLayout = {
 };
 
 const Register = () => {
+  const navigate = useNavigate()
   const [form] = Form.useForm();
   const { saveNewUserToLocal } = useContext(AppContext)
   const onFinish = (values) => {
+    console.log("dsadasd")
+    for(let key of Object.keys(values)){
+      values[key].trim()
+    }
+    const ListUser = JSON.parse(localStorage.getItem('ListUser')) 
+    const accountExits = ListUser.map((e,i)=>{
+      return e.username===values.username
+    })
+    if(accountExits[0]){
+      message.error("Username is already exist")
+      return
+    }
     saveNewUserToLocal(values)
     message.success('Registration successful!');
+    navigate('/')
   };
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>

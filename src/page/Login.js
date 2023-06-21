@@ -4,6 +4,7 @@ import { Button, message, Form, Input } from 'antd';
 import { AppContext } from '../AppContext';
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { stringify } from 'uuid';
 const Login = () => {
   const navigate = useNavigate();
   const onFinish = ({ username, password }) => {
@@ -14,6 +15,21 @@ const Login = () => {
       if (username === "admin" && password === "admin") {
         message.success('Hello Admin !');
         navigate('/Admin')
+      }
+      else{
+        let ListUser = localStorage.getItem('ListUser')
+        ListUser= JSON.parse(ListUser)
+      
+        const validAccount = ListUser.filter((e,index)=>{
+          return username===e.username&&e.password 
+        })
+        if(validAccount[0]){
+          console.log(validAccount)
+          localStorage.setItem('CurrentUser',JSON.stringify(validAccount))
+          navigate('/')
+          return
+        }
+        message.error("Invalid username or password")
       }
   }
 };

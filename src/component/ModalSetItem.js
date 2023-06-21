@@ -1,11 +1,11 @@
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 const ModalSetItem = ({ isModaSetOpen, setisModaSetOpen, ccolumns, productForEditing }) => {
-
+    console.log(productForEditing)
     const [productInfo, setProductInfo] = useState(productForEditing)
-
     useEffect(() => {
         setProductInfo(productForEditing)
+    
     }, [productForEditing, isModaSetOpen])
     const showModal = () => {
         setisModaSetOpen(true);
@@ -22,7 +22,7 @@ const ModalSetItem = ({ isModaSetOpen, setisModaSetOpen, ccolumns, productForEdi
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    console.log(productInfo);
+
     return (
 
         <Modal
@@ -33,7 +33,7 @@ const ModalSetItem = ({ isModaSetOpen, setisModaSetOpen, ccolumns, productForEdi
                 <Button key="cancel" onClick={handleCancel}>
                     Cancel
                 </Button>,
-                <Button key="submit" type="primary" htmlType="submit" onClick={onFinish} form="formAddItem">
+                <Button key="submit" type="primary" htmlType="submit" onClick={handleOk} form="formAddItem">
                     Ok
                 </Button>,
             ]}
@@ -59,21 +59,22 @@ const ModalSetItem = ({ isModaSetOpen, setisModaSetOpen, ccolumns, productForEdi
 
             >
                 {
-                    Object.entries(productInfo).map(([key, value]) =>
-                        <Form.Item
-                            key={`${key}-${productInfo.id}`}
-                            label={key}
-                            name={key}
-                            value={value}
-                            rules={[
-                                {
-                                    required: true,
-                                    message: `Please input your ${key}!`,
-                                },
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>)
+                    
+                    // Object.entries(productInfo).map(([key, value]) =>{
+                    //    return <Form.Item
+                    //         key={`${key}-${productInfo.id}`}
+                    //         label={key}
+                    //         name={key}
+                    //         value={value}
+                    //         rules={[
+                    //             {
+                    //                 required: true,
+                    //                 message: `Please input your ${key}!`,
+                    //             },
+                    //         ]}
+                    //     >
+                    //       {key === 'img' ? <input type="file" /> : <Input />}
+                    //     </Form.Item>})
                 }
 
             </Form>
