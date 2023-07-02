@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { stringify } from 'uuid';
 const Login = () => {
   const navigate = useNavigate();
+  const { setCurrentUser } = useContext(AppContext)
   const onFinish = ({ username, password }) => {
     if (username.trim() === "" || password.trim() === "") {
       message.error('Invalid username or password');
@@ -20,10 +21,10 @@ const Login = () => {
         let ListUser = localStorage.getItem('ListUser')
         ListUser= JSON.parse(ListUser)
       
-        const validAccount = ListUser.filter((e,index)=>{
+        const validAccount = ListUser?.find((e,index)=>{
           return username===e.username&&e.password 
         })
-        if(validAccount[0]){
+        if(validAccount){
           console.log(validAccount)
           localStorage.setItem('CurrentUser',JSON.stringify(validAccount))
           navigate('/')
@@ -33,7 +34,7 @@ const Login = () => {
       }
   }
 };
-const { setAdminIs, adminIs } = useContext(AppContext)
+
 return (
   <div className='flex flex-col justify-center items-center h-[500px]'>
     <h1 className='text-[1.7em]'>SIGN IN</h1>

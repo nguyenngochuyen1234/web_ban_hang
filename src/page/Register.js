@@ -30,17 +30,22 @@ const Register = () => {
   const { saveNewUserToLocal } = useContext(AppContext)
   const onFinish = (values) => {
     console.log("dsadasd")
-    for(let key of Object.keys(values)){
+    for (let key of Object.keys(values)) {
       values[key].trim()
     }
-    const ListUser = JSON.parse(localStorage.getItem('ListUser')) 
-    const accountExits = ListUser.map((e,i)=>{
-      return e.username===values.username
+
+    let ListUser = []
+    if (localStorage.getItem('ListUser')) {
+      ListUser = JSON.parse(localStorage.getItem('ListUser'))
+    }
+    const accountExits = ListUser?.find((e, i) => {
+      return e.username === values.username
     })
-    if(accountExits[0]){
+    if (accountExits) {
       message.error("Username is already exist")
       return
     }
+    console.log({ values })
     saveNewUserToLocal(values)
     message.success('Registration successful!');
     navigate('/')
@@ -109,7 +114,7 @@ const Register = () => {
           <Input placeholder='First name' />
         </Form.Item>
         <Form.Item
-        name="lastName"
+          name="lastName"
           rules={[
             {
               type: 'Last name',
@@ -124,7 +129,7 @@ const Register = () => {
           <Input placeholder='Last name' />
         </Form.Item>
         <Form.Item
-        name="username"
+          name="username"
           rules={[
             {
               type: 'Username',
@@ -140,7 +145,7 @@ const Register = () => {
         </Form.Item>
 
         <Form.Item
-        name="email"
+          name="email"
           rules={[
             {
               type: 'email',
@@ -156,7 +161,7 @@ const Register = () => {
         </Form.Item>
 
         <Form.Item
-        name="password"
+          name="password"
           rules={[
             {
               required: true,

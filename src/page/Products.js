@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { AppContext } from '../AppContext';
 import { Button } from 'antd';
 import { Input } from 'antd';
@@ -15,11 +15,18 @@ const Products = () => {
 
   const { UserProducts, handleAddProduct } = useContext(AppContext)
   const productData = productsApi.find(product=>product.id==id)
-  const lastQuantity = UserProducts.find(product=>product.id==id) || 0
-  const [count, setCount] = useState(1);
+  const UserProductsData = UserProducts.find(product=>product.id==id) || 0
+  console.log({productData, UserProductsData})
+  const price = productData.price || 0
+  const [count, setCount] = useState(UserProductsData.quantity || 0);
+  const [total, setTotal] = useState(UserProductsData.total || 0);
   const [index, setIndex] = useState(0);
 
-  const increment = () => {
+  useEffect(()=>{
+    setTotal(count*price)
+  }, [count])
+
+  const increment = () => { 
     setCount(count + 1)
   }
   const decrement = () => {
@@ -30,7 +37,7 @@ const Products = () => {
 
   const navigate = useNavigate();
   const handleAddToCart = () => {
-    handleAddProduct({...productData, quantity:count + lastQuantity})
+    handleAddProduct({...productData, quantity:count, total:total})
     navigate('/cart')
   }
 
