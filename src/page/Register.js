@@ -29,7 +29,7 @@ const Register = () => {
   const [form] = Form.useForm();
   const { saveNewUserToLocal } = useContext(AppContext)
   const onFinish = (values) => {
-    console.log("dsadasd")
+    
     for(let key of Object.keys(values)){
       values[key].trim()
     }

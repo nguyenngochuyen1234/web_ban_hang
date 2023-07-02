@@ -10,6 +10,7 @@ import ListProducts from './page/ListProducts'
 import Admin from './Admin';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Search from './page/Search';
+import ManageUser from './page/ManageUser';
 function App() {
 
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="collection/:pathName" element={<ListProducts />} />
           <Route path="search" element={<Search />} />
+          <Route path="manageUser" element={<ManageUser />} />
+
         </Route>
 
     
