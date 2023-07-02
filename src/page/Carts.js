@@ -7,7 +7,7 @@ import ProductCart from '../component/ProductCart';
 import '../style/Cart.css'
 import img from '../assets/img/thanhToan.webp'
 const Carts = () => {
-  const { UserProducts, handleAddProduct } = useContext(AppContext)
+  const { UserProducts, handleAddProduct, totalCost } = useContext(AppContext)
   const [productsArr, setProducsArr] = useState(UserProducts)
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const Carts = () => {
               <div className='px-3 w-[366px]'>
                 <div className='flex flex-row justify-between mb-[5px]'>
                   <h5>SUBTOTAL</h5>
-                  <h5>$899.55 USD</h5>
+                  <h5>{totalCost} USD</h5>
                 </div>
                 <p className='product-cart_options'>Please confirm the product size - Shipping fee is calculated at checkout</p>
                 <button className='p-5 mb-[5px] mt-4 w-[100%] button_checkout text-[#fff] bg-[#010101] rounded-[5px]' onClick={() => { navigate("/checkout") }}>Checkout</button>
