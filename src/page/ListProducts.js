@@ -9,7 +9,7 @@ const ListProducts = () => {
   let productDisplay = productsArr.filter(product => product.collections === nameCollection)
   console.log({ productDisplay })
   return (
-    <div className='h-[100vh] flex flex-col mt-[88px] px-3 items-center'>
+    <div className='h-[100vh] flex flex-col mt-[88px] px-[20px] items-center'>
       <div className="mt-[10px] mb-6 w-[100%] pl-[100px] text-[14px] font-[400] leading-5">
         <p className='text-[#001219]'>HOME / {nameCollection}</p> 
         <h5 className='text-[20px]'>{nameCollection}</h5>
