@@ -32,19 +32,17 @@ const Login = () => {
         message.error("Invalid username or password")
       }
   }
-};
-const { setAdminIs, adminIs } = useContext(AppContext)
-return (
-  <div className='flex flex-col justify-center items-center h-[500px]'>
-    <h1 className='text-[1.7em]'>SIGN IN</h1>
-    <Form
+    };
+  return (
+    <div className='flex flex-col justify-center items-center h-[100%]'>
+      <h1 className='text-[50px]'>ĐĂNG NHẬP</h1>
+      <Form
       name="normal_login"
       className="login-form"
       initialValues={{
         remember: true,
       }}
       onFinish={onFinish}
-      id="formLogin"
     >
       <Form.Item
         name="username"
@@ -80,9 +78,9 @@ return (
         </Link>
       </div>
     </Form>
-  </div>
+    </div>
 
-)
+  )
 }
 
 export default Login
