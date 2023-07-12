@@ -12,6 +12,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Collections from './component/Collection';
 
+import Search from './page/Search';
+import ManageUser from './page/ManageUser';
 function App() {
 
 
@@ -24,13 +26,18 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="collection/:pathName" element={<Collections />} />
+          <Route path="collection/:pathName" element={<ListProducts />} />
+          <Route path="search" element={<Search />} />
+          <Route path="manageUser" element={<ManageUser />} />
         </Route>
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="admin" element={<Admin />} />
+
+    
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
 

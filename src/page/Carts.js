@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Col, Row } from 'antd';
+import { AppContext } from '../AppContext';
 import productsApi from "../api"
 import ProductCart from '../component/ProductCart';
 import '../style/Cart.css'
 import img from '../assets/img/thanhToan.webp'
 const Carts = () => {
-  const [productsArr, setProducsArr] = useState(productsApi)
+  const { UserProducts, handleAddProduct } = useContext(AppContext)
+  const [productsArr, setProducsArr] = useState(UserProducts)
   const navigate = useNavigate();
 
   return (

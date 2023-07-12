@@ -1,42 +1,10 @@
-import React from 'react'
-import {AutoComplete,Button,Cascader,Checkbox,Col,Form,Input,InputNumber,Row,Select,} from 'antd';
+import React, { useContext } from 'react'
+import { AutoComplete, Button, Cascader, Checkbox, Col, Form, Input, message, Row, Select, } from 'antd';
+import { AppContext } from '../AppContext';
 import { useState } from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 const { Option } = Select;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -55,22 +23,27 @@ const formItemLayout = {
     },
   },
 };
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
+
 const Register = () => {
+  const navigate = useNavigate()
   const [form] = Form.useForm();
+  const { saveNewUserToLocal } = useContext(AppContext)
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    
+    for(let key of Object.keys(values)){
+      values[key].trim()
+    }
+    const ListUser = JSON.parse(localStorage.getItem('ListUser')) 
+    const accountExits = ListUser.map((e,i)=>{
+      return e.username===values.username
+    })
+    if(accountExits[0]){
+      message.error("Username is already exist")
+      return
+    }
+    saveNewUserToLocal(values)
+    message.success('Registration successful!');
+    navigate('/')
   };
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -109,126 +82,141 @@ const Register = () => {
     value: website,
   }));
   return (
-    <div className='flex flex-col justify-center items-center h-[100%]'>
-      <h1 className='text-[50px]'>SIGN IN</h1>
+    <div className='flex flex-col justify-center items-center h-[600px] mt-[50px]'>
+      <h1 className='text-[1.7em]'>SIGN UP</h1>
       <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
-      style={{
-        maxWidth: 1000,
-      }}
-      scrollToFirstError
-    >
-      <Form.Item
-        rules={[
-          {
-            type: 'First name',
-            message: 'The input is not valid first name!',
-          },
-          {
-            required: true,
-            message: 'Please input your first name!',
-          },
-        ]}
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          prefix: '86',
+        }}
+        style={{
+          maxWidth: 1000,
+        }}
+        id="formRegister"
       >
-        <Input placeholder='First name' />
-      </Form.Item>
-      <Form.Item
-        rules={[
-          {
-            type: 'Last name',
-            message: 'The input is not valid Last name!',
-          },
-          {
-            required: true,
-            message: 'Please input your Last name!',
-          },
-        ]}
-      >
-        <Input placeholder='Last name' />
-      </Form.Item>
-
-      <Form.Item
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
-      >
-        <Input placeholder='email' />
-      </Form.Item>
-
-      <Form.Item
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password  placeholder='Password' />
-      </Form.Item>
-
-      <Form.Item
-        name="confirm"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
+        <Form.Item
+          name="firstName"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your first name!',
             },
-          }),
-        ]}
-      >
-        <Input.Password placeholder='Confirm password' />
-      </Form.Item>
+          ]}
+        >
+          <Input placeholder='First name' />
+        </Form.Item>
+        <Form.Item
+        name="lastName"
+          rules={[
+            {
+              type: 'Last name',
+              message: 'The input is not valid Last name!',
+            },
+            {
+              required: true,
+              message: 'Please input your Last name!',
+            },
+          ]}
+        >
+          <Input placeholder='Last name' />
+        </Form.Item>
+        <Form.Item
+        name="username"
+          rules={[
+            {
+              type: 'Username',
+              message: 'The input is not valid Username!',
+            },
+            {
+              required: true,
+              message: 'Please input your Username!',
+            },
+          ]}
+        >
+          <Input placeholder='Username' />
+        </Form.Item>
 
-      <Form.Item
-        name="phone"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your phone number!',
-          },
-        ]}
-      >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: '100%',
-          }}
-          placeholder='0123456789'
-        />
-      </Form.Item>
+        <Form.Item
+        name="email"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}
+        >
+          <Input placeholder='Email' />
+        </Form.Item>
 
-      <Button className='bg-[#010101] text-[#fff] w-[100%]'>SIGN UP</Button> 
-    
-      <div className='flex justify-between'>
-        
-        <h1>Nếu đã có tài khoản?</h1>
-        <Link to="/login" className='text-[#074ac7] text-blue-400 hover:border-b border-blue-400'>SIGN IN</Link>
-      </div>
-    </Form>
+        <Form.Item
+        name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password placeholder='Password' />
+        </Form.Item>
+
+        <Form.Item
+          name="confirm"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('The new password that you entered do not match!'));
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder='Confirm password' />
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your phone number!',
+            },
+          ]}
+        >
+          <Input
+            addonBefore={prefixSelector}
+            style={{
+              width: '100%',
+            }}
+            placeholder='0123456789'
+          />
+        </Form.Item>
+
+        <Button className='bg-[#010101] text-[#fff] w-[100%]' key="submit" type="primary" htmlType="submit" form="formRegister">SIGN UP</Button>
+        <div className='flex justify-between items-center my-2 text-[16px]'>
+          <p>Already have an account?</p>
+          <Link to="/login">
+            Sign in
+          </Link>
+        </div>
+
+      </Form>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
 const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
-
+  let temp = JSON.parse(localStorage.getItem('dataSource'))
   const showModal = () => {
     setIsModalAddOpen(true);
   };
@@ -12,7 +12,12 @@ const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
     setIsModalAddOpen(false);
   };
   const onFinish = (values) => {
-    console.log('Success:', values);
+    const object2 = Object.assign({}, values);
+    
+    //  productNew=  JSON.stringify(productNew)
+     console.log(JSON.stringify(object2))
+    // localStorage.setItem('dataSource',)
+    setIsModalAddOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -53,12 +58,12 @@ const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
 
       >
         {
-          columns.map(col =>
+          columns.map((col) =>
             <Form.Item
-            key={col.key}
+              key={col.key}
               label={col.title}
               name={col.key}
-              
+              type='file'
               rules={[
                 {
                   required: true,
@@ -66,7 +71,7 @@ const ModalAddItem = ({ isModalAddOpen, setIsModalAddOpen, columns }) => {
                 },
               ]}
             >
-              <Input />
+            {col.title === 'Img' ? <input type="file" /> : <Input />}
             </Form.Item>)
         }
 

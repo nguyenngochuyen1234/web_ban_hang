@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Space, Table,  message, Popconfirm, Tag } from 'antd';
 import { DeleteOutlined, CheckOutlined, PlusOutlined } from '@ant-design/icons';
-import ModalAddItem from '../component/ModalAddItem';
-import ModalDeleteItem from '../component/ModalDeleteItem';
-import ModalSetItem from '../component/ModalSetItem';
-let startIndex = 0;
+
+
 
 const data = [
   {
