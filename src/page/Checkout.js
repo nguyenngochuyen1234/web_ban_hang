@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import img from '../assets/img/0x1512@164335548704b22996ff.webp'
 import { Col, Row, ConfigProvider } from 'antd';
 import { Button, Form, Input, InputNumber, Checkbox } from 'antd';
 import imgPayment from '../assets/img/Screenshot 2023-06-1102727.png'
 import { RightOutlined } from '@ant-design/icons/lib/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
-import productsApi from "../api"
+import { AppContext } from '../AppContext';
 const layout = {
 
 };
@@ -15,20 +14,24 @@ const onFinish = (values) => {
   console.log(values);
 };
 const Checkout = () => {
-  const [productsArr, setProducsArr] = useState(productsApi)
-    const navigate = useNavigate();
+  const { UserProducts, CurrentUser, totalCost } = useContext(AppContext)
+  const [productsArr, setProducsArr] = useState(UserProducts || [])
+  const {email,firstName,lastName, phone} = CurrentUser
+  const initialValues = {
+    email,firstName,lastName, phoneNumber:phone
+  };
+  const navigate = useNavigate();
 
   return (
     <div className='pl-[80px] flex flex-row justify-between w-[100%]'>
       <div className='pt-[56px] pr-[64px] w-[652px]'>
-        <img className=' h-[40px]' src={img}  onClick={()=>{navigate('/')}}/>
+        <img className=' h-[40px]' src={img} onClick={() => { navigate('/') }} />
         <div className='flex flex-row items-center text-left my-4'>
           <a className='text-[blue]'>Cart</a>
-          <RightOutlined className='px-[10px] w-8 h-8 text-[#777] font-[600]'/>
+          <RightOutlined className='px-[10px] w-8 h-8 text-[#777] font-[600]' />
           <p>Checkout</p>
         </div>
         <div className='flex flex-row justify-between items-center p-[10px] '>
-        <FontAwesomeIcon icon="fa-regular fa-location-dot" /> 
           <span className='section-title'>Shipping Address</span>
           <p className='text-[14px] text-[#1a1a1a]'>Already have an account? Sign in or continue as guest. Log in</p>
         </div>
@@ -40,6 +43,8 @@ const Checkout = () => {
             style={{
               maxWidth: 600,
             }}
+            id="formCheckout"
+            initialValues={initialValues} 
           >
             <Form.Item
               name='email'
@@ -49,7 +54,7 @@ const Checkout = () => {
                 },
               ]}
             >
-              <Input placeholder="Email" />
+              <Input placeholder="Email"/>
             </Form.Item>
             <Form.Item
 
@@ -60,7 +65,7 @@ const Checkout = () => {
                 },
               ]}
             >
-              <Input placeholder="First Name" />
+              <Input placeholder="First Name"/>
             </Form.Item>
             <Form.Item
               name='lastName'
@@ -70,7 +75,7 @@ const Checkout = () => {
                 },
               ]}
             >
-              <Input placeholder="Last Name" />
+              <Input placeholder="Last Name"/>
             </Form.Item>
             <Form.Item
               name='address'
@@ -90,7 +95,7 @@ const Checkout = () => {
                 },
               ]}
             >
-              <Input placeholder="Phone Number" />
+              <Input placeholder="Phone Number"/>
             </Form.Item>
             <Form.Item>
               <Checkbox>
@@ -103,9 +108,6 @@ const Checkout = () => {
                 offset: 8,
               }}
             >
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
             </Form.Item>
           </Form>
           <div className='line-row'></div>
@@ -128,65 +130,66 @@ const Checkout = () => {
                 <span className='text-[12px] text-[#777]'>All transactions are secure and encrypted</span>
 
               </div>
-              <img src={imgPayment} className='h-[38px]'/>
+              <img src={imgPayment} className='h-[38px]' />
             </div>
-              <div className='p-4'>
-            <Form
-              {...layout}
-              name="nest-messages"
-              onFinish={onFinish}
-              style={{
-                maxWidth: 600,
-                backgroundColor: "#fff",
-                padding: 8,
-              }}
-            >
-              <Form.Item
-                name='cardNumber'
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+            <div className='p-4'>
+              <Form
+                {...layout}
+                name="nest-messages"
+                onFinish={onFinish}
+                style={{
+                  maxWidth: 600,
+                  backgroundColor: "#fff",
+                  padding: 8,
+                }}
+                
               >
-                <Input placeholder="Card Number" />
-              </Form.Item>
-              <Form.Item
-                name='cardholderName'
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Cardholder Name" />
-              </Form.Item>
-              <Form.Item
-                name='cardNumber'
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Card Number" />
-              </Form.Item>
-            </Form>
-              </div>
+                <Form.Item
+                  name='cardNumber'
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input placeholder="Card Number" />
+                </Form.Item>
+                <Form.Item
+                  name='cardholderName'
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input placeholder="Cardholder Name" />
+                </Form.Item>
+                <Form.Item
+                  name='cardNumber'
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input placeholder="Card Number" />
+                </Form.Item>
+              </Form>
+            </div>
           </div>
           <div className="text-[12px] font-[400] text-[#777] pt-6">By clicking button Place Your Order, you agree to the Terms of service</div>
           <div className=' text-right'>
-          <button className='p-5 mb-[5px] mt-4 text-[#fff] bg-[#2C9516] rounded-[5px] py-[18px] px-[56px]'>
-            <div className='text-[1.375em] font-[600]'>Place Your Order</div>
-            <div className='text-[0.755em] font-[400]'>Total: 1,743.50</div>
-          </button>
+            <button key="submit" htmlType="submit" form="formCheckout" className='p-5 mb-[5px] mt-4 text-[#fff] bg-[#2C9516] rounded-[5px] py-[18px] px-[56px]'>
+              <div className='text-[1.375em] font-[600]'>Place Your Order</div>
+              <div className='text-[0.755em] font-[400]'>Total: 1,743.50</div>
+            </button>
           </div>
         </div>
       </div>
       <div className='bg-[#f3f3f3] pt-[56px] px-[64px] border-l-[1px] border-l-[#dfdfdf]'>
         <div className='relative'>
-          {productsArr.map(product => (
-            <div className='flex flex-row w-[450px]'>
+          {productsArr.map((product,id) => (
+            <div className='flex flex-row w-[450px]' key={id}>
               <div>
                 <img src={product.img} className='h-[66px] w-[66px]' />
               </div>
@@ -205,7 +208,7 @@ const Checkout = () => {
         <div className='relative'>
           <div className='flex flex-row items-center justify-between pt-4'>
             <p>Subtotal</p>
-            <h5>$1,499.25 USD</h5>
+            <h5>${totalCost} USD</h5>
           </div>
           <div className='flex flex-row items-center justify-between py-4'>
             <p>Shipping</p>
@@ -214,9 +217,9 @@ const Checkout = () => {
           <div className='line-row  mt-4'></div>
         </div>
         <div className='flex flex-row items-center justify-between pt-4'>
-            <p>Total</p>
-            <h5 className='text-[2.28em] font-[600] pt-5'>$1,743.50 USD</h5>
-          </div>
+          <p>Total</p>
+          <h5 className='text-[2.28em] font-[600] pt-5'>${totalCost+244.25} USD</h5>
+        </div>
       </div>
     </div>
   )

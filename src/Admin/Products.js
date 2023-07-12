@@ -102,6 +102,7 @@ const Products = () => {
   const [isModaSetOpen, setisModaSetOpen] = useState(false);
   const [productForEditing, setProductForEditing] = useState({})
   useEffect(()=>{
+    if(localStorage.getItem('dataSource'))
     setData(JSON.parse(localStorage.getItem('dataSource')))
     console.log(data[0])
   },[])

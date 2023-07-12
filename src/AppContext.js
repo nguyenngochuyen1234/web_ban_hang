@@ -9,23 +9,22 @@ export const AppProvider = ({ children }) => {
   const CurrentUserjson = localStorage.getItem("CurrentUser")
   const [CurrentUser, setCurrentUser] = useState(CurrentUserjson ? JSON.parse(CurrentUserjson) : {})
   const [listUser, setListUser] = useState(ListUserjson ? JSON.parse(ListUserjson) : [])
- 
   const [totalCost, setTotalCost] = useState(0)
-
   const [UserProducts, setUserProduct] = useState(CurrentUser?.products || [])
-  useEffect(()=>{
+  console.log({CurrentUser})
+  useEffect(() => {
     let total = 0
-    if(UserProducts){
-      UserProducts?.forEach(product=>{
-        console.log({price:product.price, quantity:product.quantity})
-        total+= product.price * product.quantity
+    if (UserProducts) {
+      UserProducts?.forEach(product => {
+        console.log({ price: product.price, quantity: product.quantity })
+        total += product.price * product.quantity
       })
-      console.log({total})
+      console.log({ total })
     }
     setTotalCost(total)
-  },[UserProducts])
+  }, [UserProducts])
   useEffect(() => {
-    console.log(listUser)
+    setUserProduct(CurrentUser?.products || [])
     let newListUser = listUser?.map(user => user.id == CurrentUser.id ? CurrentUser : user)
     localStorage.setItem("ListUser", JSON.stringify(newListUser))
     localStorage.setItem("CurrentUser", JSON.stringify(CurrentUser))
@@ -38,13 +37,17 @@ export const AppProvider = ({ children }) => {
       products: [],
       ...newUser
     }
-    if (listUser) {
+    if (listUser.length == 0) {
+      localStorage.setItem("ListUser", JSON.stringify([newUserData]))
+      setListUser([newUserData])
+    } else {
       let newListUser = [...listUser, newUserData]
       localStorage.setItem("ListUser", JSON.stringify(newListUser))
-    } else {
-      localStorage.setItem("ListUser", JSON.stringify([newUserData]))
+      setListUser(newListUser)
     }
     localStorage.setItem("CurrentUser", JSON.stringify(newUserData))
+    setCurrentUser(newUserData)
+    
   }
   const arrCollections = [
     {
@@ -72,16 +75,20 @@ export const AppProvider = ({ children }) => {
     }
 
     setUserProduct(newProducts)
-    setCurrentUser(prev => ({ ...prev, products: newProducts }))
+    setCurrentUser(prev => {
+      console.log({prev})
+      return { ...prev, products: newProducts }
+    })
   }
   const value = {
     arrCollections,
-    productsArr,
+    productsArr,CurrentUser,
     setProducsArr,
     adminIs, setAdminIs,
     UserProducts, setUserProduct,
     saveNewUserToLocal, handleAddProduct,
-    totalCost
+    totalCost, setCurrentUser, listUser
+
   };
   return <AppContext.Provider value={value}>
     {children}
